@@ -18,8 +18,6 @@
 ## Yêu Cầu Hệ Thống
 
 - **Người dùng hệ thống:**
-    - Sinh viên
-    - Giáo viên
     - Quản trị viên
 
 - **Chức năng:**
@@ -27,7 +25,6 @@
     - Quản lý hồ sơ sinh viên chi tiết
     - Quản lý điểm số
     - Quản lý khoa học
-    - Quản lý lịch học
     - Thống kê dữ liệu
 
 ## Kiến Trúc Hệ Thống
