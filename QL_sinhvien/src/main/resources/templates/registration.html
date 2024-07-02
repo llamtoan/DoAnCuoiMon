@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 70px; /* Space for fixed navbar */
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+            color: #fff !important;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: purple;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="email"] {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .btn-success {
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .btn-success:hover {
+            background-color: #4cae4c;
+        }
+
+        .form-group span a {
+            color: #5cb85c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .form-group span a:hover {
+            color: #4cae4c;
+        }
+
+        .alert {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- create navigation bar (header) -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" th:href="@{/}">Quản trị - Bảo mật</a>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+
+    <!-- Tạo form đăng ký -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <!-- success message -->
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">Bạn đã đăng ký thành công!</div>
+                </div>
+                <h1>ĐĂNG KÝ THÔNG TIN</h1>
+                <form th:action="@{/registration}" method="post" th:object="${user}">
+                    <div class="form-group">
+                        <label class="control-label" for="firstName">Họ</label>
+                        <input id="firstName" class="form-control" th:field="*{firstName}" placeholder="Nhập họ" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="lastName">Tên</label>
+                        <input id="lastName" class="form-control" th:field="*{lastName}" placeholder="Nhập tên" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="email">Email</label>
+                        <input id="email" class="form-control" type="email" th:field="*{email}" placeholder="Nhập email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="password">Mật khẩu</label>
+                        <input id="password" class="form-control" type="password" th:field="*{password}" placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Đăng ký</button>
+                        <span>Đã đăng ký rồi? <a href="/" th:href="@{/login}">Đăng nhập ở đây</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>

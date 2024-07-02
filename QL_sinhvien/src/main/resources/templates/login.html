@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web quản lý sinh viên</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 70px;
+            /* Space for fixed navbar */
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+            color: #fff !important;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: purple;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="email"] {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #337ab7;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #286090;
+        }
+
+        .btn-success {
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .btn-success:hover {
+            background-color: #4cae4c;
+        }
+
+        .form-group span a {
+            color: #5cb85c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .form-group span a:hover {
+            color: #4cae4c;
+        }
+
+        .alert {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- create navigation bar (header) -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" th:href="@{/}">Đăng ký và đăng nhập</a>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>Đăng nhập thông tin người dùng</h1>
+                <form th:action="@{/login}" method="post">
+                    <!-- error message -->
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Tên người dùng/mật khẩu không hợp lệ</div>
+                    </div>
+                    <!-- logout message -->
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">Bạn đã đăng xuất.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập email" autofocus="autofocus" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="login-submit" id="login-submit" class="btn btn-primary">Đăng nhập</button>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <span>Tạo tài khoản mới? <a href="/" th:href="@{/registration}">Đăng ký</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>

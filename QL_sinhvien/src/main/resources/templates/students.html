@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý sinh viên</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 70px;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>Xin chào, <span th:text="${#authentication.getPrincipal().username}">User</span></div>
+            <div sec:authorize="isAuthenticated()">
+                <a th:href="@{/login?logout}" class="btn btn-danger">Đăng xuất</a>
+            </div>
+        </div>
+
+        <h1>Danh sách sinh viên</h1>
+        <form action="/students/search" method="get" class="mb-4">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="number" class="form-control" name="diemTin" placeholder="Nhập điểm thi" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="tenKhoa" placeholder="Nhập tên khoa" required>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex justify-content-between align-items-center">
+            <a th:href="@{/showNewStudentForm}" class="btn btn-primary btn-sm mb-3">Thêm sinh viên</a>
+        </div>
+
+        <table class="table table-striped table-responsive-md">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Tên khoa</th>
+                    <th>Giới tính</th>
+                    <th>Điểm thi</th>
+                    <th>Tình trạng</th>
+                    <th>Lựa chọn</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.hoTen}"></td>
+                    <td th:text="${student.tenKhoa}"></td>
+                    <td th:text="${student.gioiTinh}"></td>
+                    <td th:text="${student.diemTin}"></td>
+                    <td th:text="${student.diemTin >= 5 ? 'Đỗ' : 'Trượt'}"></td>
+                    <td>
+                        <a th:href="@{/showFormForUpdate/{id}(id=${student.maSV})}" class="btn btn-primary btn-sm">Sửa</a>
+                        <a th:href="@{/deleteStudent/{id}(id=${student.maSV})}" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBkatzT+zE6C5pqOGyELTBO7J2WqvYfKt4ZoJ0nQ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>
